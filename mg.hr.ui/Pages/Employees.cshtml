@@ -4,3 +4,14 @@
 }
 
 <h1>Employees</h1>
+
+<!--Display the employee list-->
+<table class="table">
+    @foreach(var employee in Model.Employees)
+    {
+    <tr>
+        <td>@employee.name</td>
+        <td>@employee.roleName</td>
+    </tr>
+    }
+</table>

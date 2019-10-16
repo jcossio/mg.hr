@@ -1,6 +1,9 @@
-﻿namespace mg.hr.da
+﻿namespace mg.hr.Core
 {
-    public class EmployeeDTO
+    /// <summary>
+    /// Employee class that maps to the API data source
+    /// </summary>
+    public class Employee
     {
         public int id { get; set; }
         public string name { get; set; }
