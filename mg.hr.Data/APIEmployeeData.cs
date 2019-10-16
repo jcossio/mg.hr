@@ -48,12 +48,36 @@ namespace mg.hr.Data
         /// <summary>
         /// Method that returns all the employees
         /// </summary>
+        /// <param name="id">Employee Id</param>
         /// <returns>List of employees</returns>
-        public IEnumerable<Employee> GetAll()
+        public IEnumerable<Employee> GetEmployeesById(string id = null)
         {
-            return from e in employees
-                   orderby e.name
-                   select e;
+            // Check parameter
+            if (string.IsNullOrEmpty(id))
+            {
+                return from e in employees
+                       orderby e.name
+                       select e;
+            }
+            else
+            {
+                // Convert
+                if (int.TryParse(id, out int employeeId))
+                {
+                    // Query single employee
+                    return from e in employees
+                           where e.id == employeeId
+                           orderby e.name
+                           select e;
+                }
+                else
+                {
+                    // Return all if the id does not match
+                    return from e in employees
+                           orderby e.name
+                           select e;
+                }
+            }
         }
     }
 }

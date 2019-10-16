@@ -8,6 +8,6 @@ namespace mg.hr.Data
     /// </summary>
     public interface IEmployeeData
     {
-        IEnumerable<Employee> GetAll();
+        IEnumerable<Employee> GetEmployeesById(string id);
     }
 }
