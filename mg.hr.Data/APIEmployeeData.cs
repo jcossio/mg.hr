@@ -14,8 +14,7 @@ namespace mg.hr.Data
     /// </summary>
     public class APIEmployeeData : IEmployeeData
     {
-        private readonly IConfiguration _config;
-        private List<Employee> _employees;
+        private readonly List<Employee> _employees;
 
         /// <summary>
         /// Constructor where we initialize the list of employees seeded from the Web API
@@ -26,9 +25,7 @@ namespace mg.hr.Data
             // Grab the initial employee data from the Web API provided
             using (var httpClient = new HttpClient())
             {
-                // Store config reference for later use
-                this._config = config;
-                // Grap Data URI
+                // Grap Data from seed Url
                 var seedUrl = config["SeedDataUrl"];
                 if (string.IsNullOrEmpty(seedUrl))
                     seedUrl = "http://masglobaltestapi.azurewebsites.net/api/Employees";
@@ -36,11 +33,15 @@ namespace mg.hr.Data
                 httpClient.BaseAddress = new Uri(seedUrl);
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 var response = httpClient.GetAsync("").Result;
-
                 if (response.IsSuccessStatusCode)
                 {
                     // Parse the response body and convert to employee 
                     _employees = JsonConvert.DeserializeObject<List<Employee>>(response.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    // Have an empty list
+                    _employees = new List<Employee>();
                 }
             }
         }
