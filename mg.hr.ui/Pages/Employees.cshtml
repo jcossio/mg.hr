@@ -22,11 +22,23 @@
 
 <!--Display the employee list-->
 <table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Hourly Salary</th>
+            <th>Monthly Salary</th>
+        </tr>
+    </thead>
     @foreach(var employee in Model.Employees)
     {
     <tr>
+        <th scope="row">@employee.id</th>
         <td>@employee.name</td>
         <td>@employee.roleName</td>
+        <td>@employee.hourlySalary</td>
+        <td>@employee.monthlySalary</td>
     </tr>
     }
 </table>
