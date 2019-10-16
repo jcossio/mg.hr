@@ -20,7 +20,7 @@ namespace mg.hr.API
         public void ConfigureServices(IServiceCollection services)
         {
             // Add singleton for data demo purposes but this is not recommended in prod environments.
-            // This here allows the razor page to have access to the data class
+            // This here allows the API to have access to the data class
             services.AddSingleton<IEmployeeData, APIEmployeeData>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

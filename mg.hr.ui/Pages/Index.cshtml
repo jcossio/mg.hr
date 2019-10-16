@@ -10,7 +10,7 @@
     <div class="form-group">
         <div class="input-group">
             <!--asp-for acts like 2 way model binding. Here used to preserve the search term-->
-            <input type="search" class="form-control" asp-for="SearchText" placeholder="Enter the employee Id or leave empty to query all."/>
+            <input type="search" class="form-control" asp-for="SearchText" autocomplete="off" placeholder="Enter the employee Id or leave empty to query all."/>
             <span class="input-group-btn">
                 <button class="btn btn-default" data-toggle="tooltip" title="Get Employees">
                     <i class="glyphicon glyphicon-search"></i>
@@ -27,8 +27,7 @@
             <th>#</th>
             <th>Name</th>
             <th>Role</th>
-            <th>Hourly Salary</th> <!--To be replaced-->
-            <th>Monthly Salary</th> <!--To be replaced-->
+            <th class="text-right">Annual Salary</th>
         </tr>
     </thead>
     @foreach(var employee in Model.Employees)
@@ -37,8 +36,7 @@
     <th scope="row">@employee.id</th>
     <td>@employee.name</td>
     <td>@employee.roleName</td>
-    <td>@employee.hourlySalary</td> <!--To be replaced-->
-    <td>@employee.monthlySalary</td> <!--To be replaced-->
+    <td align="right">@string.Format("{0:C}", employee.annualSalary)</td>
 </tr>
     }
 </table>

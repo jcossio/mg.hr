@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace mg.hr.Core
+﻿namespace mg.hr.Core
 {
     /// <summary>
     /// DTO to pass to the UI
