@@ -13,29 +13,31 @@ namespace mg.hr.API.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private readonly IEmployeeData employeeData;
+        private readonly IEmployeeData _employeeData;
 
         public EmployeesController(IEmployeeData employeeData)
         {
-            this.employeeData = employeeData;
+            this._employeeData = employeeData;
         }
 
         // GET: api/Employees/2
         [HttpGet("{id}", Name = "Get")]
-        public IEnumerable<EmployeeDTO> Get(string id)
+        public IEnumerable<EmployeeDTO> Get(string id = null)
         {
-            var employees = employeeData.GetEmployeesById(id);
+            // Retrieve the employees from data service
+            var employees = _employeeData.GetEmployeesById(id);
             var employeesDTO = new List<EmployeeDTO>();
 
             // Process the information to use the Factory Pattern and return DTO
             foreach (var employee in employees)
             {
+                var specificEmployee = EmployeeFactory.Build(employee.contractTypeName, employee);
                 employeesDTO.Add(new EmployeeDTO()
                 {
-                    id = employee.id,
-                    name = employee.name,
-                    roleName = employee.roleName,
-                    annualSalary = EmployeeFactory.Build(employee.contractTypeName, employee).GetAnnualSalary()
+                    id = specificEmployee.id,
+                    name = specificEmployee.name,
+                    roleName = specificEmployee.roleName,
+                    annualSalary = specificEmployee.AnnualSalary()
                 });
             }
             return employeesDTO;

@@ -14,8 +14,8 @@ namespace mg.hr.Data
     /// </summary>
     public class APIEmployeeData : IEmployeeData
     {
-        private readonly IConfiguration config;
-        List<Employee> employees;
+        private readonly IConfiguration _config;
+        private List<Employee> _employees;
 
         /// <summary>
         /// Constructor where we initialize the list of employees seeded from the Web API
@@ -27,7 +27,7 @@ namespace mg.hr.Data
             using (var httpClient = new HttpClient())
             {
                 // Store config reference for later use
-                this.config = config;
+                this._config = config;
                 // Grap Data URI
                 var seedURI = config["SeedDataURI"];
                 if (string.IsNullOrEmpty(seedURI))
@@ -40,7 +40,7 @@ namespace mg.hr.Data
                 if (response.IsSuccessStatusCode)
                 {
                     // Parse the response body and convert to employee 
-                    employees = JsonConvert.DeserializeObject<List<Employee>>(response.Content.ReadAsStringAsync().Result);
+                    _employees = JsonConvert.DeserializeObject<List<Employee>>(response.Content.ReadAsStringAsync().Result);
                 }
             }
         }
@@ -55,7 +55,7 @@ namespace mg.hr.Data
             // Check parameter
             if (string.IsNullOrEmpty(id))
             {
-                return from e in employees
+                return from e in _employees
                        orderby e.name
                        select e;
             }
@@ -65,7 +65,7 @@ namespace mg.hr.Data
                 if (int.TryParse(id, out int employeeId))
                 {
                     // Query single employee
-                    return from e in employees
+                    return from e in _employees
                            where e.id == employeeId
                            orderby e.name
                            select e;
@@ -73,7 +73,7 @@ namespace mg.hr.Data
                 else
                 {
                     // Return all if the id does not match
-                    return from e in employees
+                    return from e in _employees
                            orderby e.name
                            select e;
                 }

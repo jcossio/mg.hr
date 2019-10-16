@@ -14,17 +14,18 @@ namespace mg.hr.API.Models
         /// <summary>
         /// Determine what type of object to return
         /// </summary>
-        /// <param name="contractType"></param>
-        /// <returns></returns>
-        public static IAnnualSalary Build(string contractType, Employee employee)
+        /// <param name="contractType">Contract Type</param>
+        /// <param name="employee">Employee details</param>
+        /// <returns>Specific instance</returns>
+        public static IEmployee Build(string contractType, Employee employee)
         {
             switch (contractType)
             {
                 case "HourlySalaryEmployee":
-                    return new HourlySalary(employee);
+                    return new HourlyEmployee(employee);
                 case "MonthlySalaryEmployee":
                 default:
-                    return new MonthlySalary(employee);
+                    return new MonthlyEmployee(employee);
             }
         }
     }
