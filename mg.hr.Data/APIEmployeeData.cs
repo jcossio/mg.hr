@@ -29,11 +29,11 @@ namespace mg.hr.Data
                 // Store config reference for later use
                 this._config = config;
                 // Grap Data URI
-                var seedURI = config["SeedDataURI"];
-                if (string.IsNullOrEmpty(seedURI))
-                    seedURI = "http://masglobaltestapi.azurewebsites.net/api/Employees";
+                var seedUrl = config["SeedDataUrl"];
+                if (string.IsNullOrEmpty(seedUrl))
+                    seedUrl = "http://masglobaltestapi.azurewebsites.net/api/Employees";
                 // Pull the initial data
-                httpClient.BaseAddress = new Uri(seedURI);
+                httpClient.BaseAddress = new Uri(seedUrl);
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 var response = httpClient.GetAsync("").Result;
 

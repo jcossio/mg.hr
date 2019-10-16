@@ -14,7 +14,10 @@ namespace mg.hr.API.Controllers
     public class EmployeesController : ControllerBase
     {
         private readonly IEmployeeData _employeeData;
-
+        /// <summary>
+        /// Constructor used here to receive the data reference
+        /// </summary>
+        /// <param name="employeeData"></param>
         public EmployeesController(IEmployeeData employeeData)
         {
             this._employeeData = employeeData;
