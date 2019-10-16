@@ -24,7 +24,7 @@ namespace mg.hr.API.Controllers
         }
 
         // GET: api/Employees/2
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id?}", Name = "Get")]
         public IEnumerable<EmployeeDTO> Get(string id = null)
         {
             // Retrieve the employees from data service
