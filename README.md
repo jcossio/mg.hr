@@ -7,4 +7,4 @@ Sample solution to display the usage of some best practices in C#.
 * Core: Contains the core components shared by all the other projects
 * Data: Has the Data access logic 
 * UI: Holds the UI part of the application
-
+* API: This is the web api portion
