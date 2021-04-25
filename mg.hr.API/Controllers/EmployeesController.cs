@@ -17,7 +17,7 @@ namespace mg.hr.API.Controllers
         /// <summary>
         /// Constructor used here to receive the data reference
         /// </summary>
-        /// <param name="employeeData"></param>
+        /// <param name="employeeData">Data from employees</param>
         public EmployeesController(IEmployeeData employeeData)
         {
             this._employeeData = employeeData;
