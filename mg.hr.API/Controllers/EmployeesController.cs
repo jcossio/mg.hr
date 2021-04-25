@@ -34,13 +34,13 @@ namespace mg.hr.API.Controllers
             // Process the information to use the Factory Pattern and return DTO
             foreach (var employee in employees)
             {
-                var specificEmployee = EmployeeFactory.Build(employee.contractTypeName, employee);
+                var salaryCalculator = SalaryCalculatorFactory.CreateSalaryCalculator(employee.contractTypeName);
                 employeesDTO.Add(new EmployeeDTO()
                 {
-                    id = specificEmployee.id,
-                    name = specificEmployee.name,
-                    roleName = specificEmployee.roleName,
-                    annualSalary = specificEmployee.AnnualSalary()
+                    id = employee.id,
+                    name = employee.name,
+                    roleName = employee.roleName,
+                    annualSalary = salaryCalculator.AnnualSalaryFor(employee)
                 });
             }
             return employeesDTO;
